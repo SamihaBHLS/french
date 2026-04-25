@@ -21,6 +21,7 @@
         ::-webkit-scrollbar-track { background: #D4CFC9; border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: #8FA0AB; border-radius: 10px; }
 
+        /* Hero Section with Parallax & 3D Canvas */
         .hero {
             position: relative;
             height: 100vh;
@@ -80,6 +81,7 @@
             transition: all 0.4s;
             letter-spacing: 1px;
             font-size: 1.1rem;
+            cursor: pointer;
         }
         .btn-scroll:hover {
             background: #8FA0AB;
@@ -96,6 +98,7 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
+        /* Section Styles - Enhanced Transitions */
         section {
             position: relative;
             padding: 100px 8%;
@@ -108,6 +111,7 @@
         .section-header {
             margin-bottom: 3rem;
             text-align: center;
+            position: relative;
         }
         .section-number {
             font-size: 1rem;
@@ -116,6 +120,11 @@
             text-transform: uppercase;
             margin-bottom: 0.75rem;
             font-weight: 500;
+            display: inline-block;
+            background: rgba(143,160,171,0.1);
+            padding: 0.3rem 1.2rem;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
         }
         .section-title {
             font-size: 3.5rem;
@@ -135,9 +144,13 @@
             background: linear-gradient(90deg, #8FA0AB, #B8C5CE);
             border-radius: 3px;
             margin: 14px auto 0;
+            transition: width 0.6s ease;
+        }
+        .section-header:hover .section-title::after {
+            width: 140px;
         }
 
-        /* Carte unique pour les 4 piliers */
+        /* Glassmorphic Master Card */
         .master-card {
             background: rgba(245, 242, 239, 0.85);
             backdrop-filter: blur(12px);
@@ -145,7 +158,7 @@
             padding: 3rem 2.8rem;
             border: 1px solid rgba(143, 160, 171, 0.4);
             box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.4s ease;
             margin: 1.5rem 0 1rem;
         }
         .master-card:hover {
@@ -164,9 +177,24 @@
             background: rgba(255, 255, 255, 0.35);
             border-radius: 32px;
             padding: 1.8rem;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             border: 1px solid rgba(143, 160, 171, 0.25);
             backdrop-filter: blur(4px);
+            position: relative;
+            overflow: hidden;
+        }
+        .pillar-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(143,160,171,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        .pillar-item:hover::before {
+            left: 100%;
         }
         .pillar-item:hover {
             background: rgba(255, 255, 255, 0.6);
@@ -184,7 +212,10 @@
             font-size: 2.3rem;
             color: #3A6070;
             margin-bottom: 1.2rem;
-            transition: 0.2s;
+            transition: transform 0.3s ease;
+        }
+        .pillar-item:hover .pillar-icon {
+            transform: scale(1.05) rotate(3deg);
         }
         .pillar-item h3 {
             font-size: 1.9rem;
@@ -213,6 +244,11 @@
             font-size: 0.8rem;
             font-weight: 600;
             color: #3A6070;
+            transition: all 0.3s ease;
+        }
+        .tag:hover {
+            background: rgba(143, 160, 171, 0.4);
+            transform: translateY(-2px);
         }
         
         .intro-block, .conclusion-special {
@@ -221,9 +257,14 @@
             border-radius: 48px;
             padding: 2.5rem 3rem;
             margin: 2rem auto;
-            transition: all 0.5s;
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             border: 1px solid rgba(143, 160, 171, 0.3);
             max-width: 1100px;
+        }
+        .intro-block:hover, .conclusion-special:hover {
+            transform: scale(1.01);
+            background: rgba(245, 242, 239, 0.85);
+            border-color: rgba(143, 160, 171, 0.6);
         }
         .intro-block {
             text-align: center;
@@ -232,6 +273,11 @@
             font-size: 3rem;
             color: #6B8A9A;
             margin-bottom: 1.5rem;
+            animation: gentleFloat 3s ease-in-out infinite;
+        }
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
         .intro-block p {
             font-size: 1.35rem;
@@ -259,18 +305,23 @@
             padding: 1.8rem 2rem;
             flex: 1;
             min-width: 240px;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             border: 1px solid rgba(143,160,171,0.4);
         }
         .conclusion-card-item:hover {
             transform: translateY(-8px);
             background: rgba(255,255,240,0.9);
             border-color: #8FA0AB;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
         }
         .conclusion-card-item i {
             font-size: 2.5rem;
             color: #6B7F8C;
             margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .conclusion-card-item:hover i {
+            transform: scale(1.1);
         }
         .conclusion-card-item h4 {
             font-size: 1.7rem;
@@ -291,6 +342,11 @@
             border-left: 4px solid #8FA0AB;
             border-right: 4px solid #B8C5CE;
             margin-top: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .quote-modern:hover {
+            background: rgba(143, 160, 171, 0.25);
+            letter-spacing: 0.3px;
         }
         
         .footer {
@@ -301,14 +357,26 @@
             font-size: 0.9rem;
         }
         
+        /* Scroll Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(45px);
-            transition: all 0.7s cubic-bezier(0.2, 0.95, 0.4, 1.1);
+            transition: all 0.8s cubic-bezier(0.2, 0.95, 0.4, 1.1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
+        }
+        
+        /* New Hover Micro-interactions */
+        .btn-scroll, .tag, .pillar-item, .conclusion-card-item {
+            cursor: pointer;
+        }
+        
+        /* Floating Animation for Hero Text */
+        @keyframes softPulse {
+            0%, 100% { text-shadow: 0 0 0px rgba(0,0,0,0); }
+            50% { text-shadow: 0 0 8px rgba(143,160,171,0.3); }
         }
         
         @media (max-width: 968px) {
@@ -342,7 +410,7 @@
     <div class="section-container">
         <div class="section-header">
             <div class="section-number">01 — introduction</div>
-            <h2 class="section-title">✨ Introduction visionnaire</h2>
+            <h2 class="section-title"><i class="fas fa-star"></i> Introduction visionnaire</h2>
         </div>
         <div class="intro-block reveal">
             <div class="intro-icon"><i class="fas fa-city"></i></div>
@@ -356,7 +424,7 @@
     <div class="section-container">
         <div class="section-header">
             <div class="section-number">02 — piliers</div>
-            <h2 class="section-title">🌿 Les piliers de la cité idéale</h2>
+            <h2 class="section-title"><i class="fas fa-building"></i> Les piliers de la cité idéale</h2>
         </div>
         <div class="master-card reveal">
             <div class="pillars-grid">
@@ -393,7 +461,7 @@
     <div class="section-container">
         <div class="section-header">
             <div class="section-number">03 — conclusion</div>
-            <h2 class="section-title">💫 Une vision accomplie</h2>
+            <h2 class="section-title"><i class="fas fa-star"></i> Une vision accomplie</h2>
         </div>
         <div class="conclusion-special reveal">
             <div class="conclusion-grid-simple">
@@ -414,15 +482,15 @@
                 <i class="fas fa-quote-right" style="color:#8FA0AB; margin-left:12px;"></i>
             </div>
             <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-                <span class="tag">🌟 HORIZON 2150</span>
-                <span class="tag">🌍 CITÉ RÉSILIENTE</span>
+                <span class="tag"><i class="fas fa-star"></i> HORIZON 2150</span>
+                <span class="tag"><i class="fas fa-leaf"></i> CITÉ RÉSILIENTE</span>
             </div>
         </div>
     </div>
 </section>
 
 <footer class="footer">
-    <p>✨ La Ville des Rêves — Édition Prestige | Design immersif & vision prospective ✨</p>
+    <p><i class="fas fa-copyright"></i> La Ville des Rêves — Samiha Bouhalas <i class="fas fa-envelope"></i></p>
 </footer>
 
 <script type="importmap">
@@ -439,11 +507,11 @@
     const canvasContainer = document.getElementById('three-canvas');
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xE8E4E0);
-    scene.fog = new THREE.FogExp2(0xE8E4E0, 0.0015);
+    scene.fog = new THREE.FogExp2(0xE8E4E0, 0.0012);
 
     const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 4.5, 20);
-    camera.lookAt(0, 2.5, 0);
+    camera.position.set(0, 5.2, 22);
+    camera.lookAt(0, 3.2, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -452,52 +520,65 @@
     renderer.setPixelRatio(window.devicePixelRatio);
     canvasContainer.appendChild(renderer.domElement);
 
-    // Lumieres
-    const ambientLight = new THREE.AmbientLight(0xE8E4E0, 0.6);
+    // Enhanced Lighting System
+    const ambientLight = new THREE.AmbientLight(0xE8E4E0, 0.65);
     scene.add(ambientLight);
-    const mainLight = new THREE.DirectionalLight(0xFFF8F0, 1.4);
+    const mainLight = new THREE.DirectionalLight(0xFFF8F0, 1.5);
     mainLight.position.set(6, 14, 5);
     mainLight.castShadow = true;
     mainLight.shadow.mapSize.width = 2048;
     mainLight.shadow.mapSize.height = 2048;
+    mainLight.shadow.camera.near = 0.5;
+    mainLight.shadow.camera.far = 30;
+    mainLight.shadow.camera.left = -10;
+    mainLight.shadow.camera.right = 10;
+    mainLight.shadow.camera.top = 10;
+    mainLight.shadow.camera.bottom = -10;
     scene.add(mainLight);
-    const fillLight = new THREE.PointLight(0x8FA0AB, 0.7);
+    
+    const fillLight = new THREE.PointLight(0x8FA0AB, 0.8);
     fillLight.position.set(-4, 6, 7);
     scene.add(fillLight);
-    const backLight = new THREE.PointLight(0xB8C5CE, 0.55);
-    backLight.position.set(0, 5, -9);
+    const backLight = new THREE.PointLight(0xB8C5CE, 0.65);
+    backLight.position.set(0, 5, -10);
     scene.add(backLight);
-    const accentLight = new THREE.PointLight(0x6B7F8C, 0.6);
+    const accentLight = new THREE.PointLight(0x6B7F8C, 0.7);
     accentLight.position.set(3, 3.5, 6);
     scene.add(accentLight);
+    
+    // Animated colored lights for ambiance
+    const colorLight = new THREE.PointLight(0x8FA0AB, 0.5);
+    colorLight.position.set(2, 3, 4);
+    scene.add(colorLight);
 
     const cityGroup = new THREE.Group();
     
-    // Tour centrale
+    // Central Tower - More Detailed
     const towerMat = new THREE.MeshStandardMaterial({ color: 0x8FA0AB, metalness: 0.88, roughness: 0.18, emissive: 0x6B7F8C, emissiveIntensity: 0.12 });
     const mainTower = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 1.15, 5.8, 64), towerMat);
     mainTower.position.y = 2.9;
     mainTower.castShadow = true;
     cityGroup.add(mainTower);
     
-    // Fenêtres tour
+    // Detailed Windows on Tower
     const winMat = new THREE.MeshStandardMaterial({ color: 0xE8E4E0, emissive: 0xC5D0D8, emissiveIntensity: 0.5 });
-    for (let i = 0; i < 32; i++) {
+    for (let i = 0; i < 48; i++) {
         const wGeo = new THREE.BoxGeometry(0.12, 0.18, 0.05);
         const win = new THREE.Mesh(wGeo, winMat);
-        const angle = (i / 32) * Math.PI * 2;
+        const angle = (i / 48) * Math.PI * 2;
         const rad = 1.0;
-        win.position.set(Math.cos(angle) * rad, 1.2 + Math.floor(i / 8) * 1.15, Math.sin(angle) * rad);
+        win.position.set(Math.cos(angle) * rad, 0.8 + Math.floor(i / 12) * 1.2, Math.sin(angle) * rad);
         mainTower.add(win);
     }
     
-    // Anneaux flottants
-    const ringGeo = new THREE.TorusGeometry(1.65, 0.09, 128, 200);
+    // Floating Rings with rotation animation
+    const ringGeo = new THREE.TorusGeometry(1.75, 0.09, 128, 200);
     const ringMatGlow = new THREE.MeshStandardMaterial({ color: 0xD4DFE6, emissive: 0x8FA0AB, emissiveIntensity: 0.4, metalness: 0.85 });
     const ringMain = new THREE.Mesh(ringGeo, ringMatGlow);
     ringMain.rotation.x = Math.PI / 2;
     ringMain.position.y = 2.4;
     cityGroup.add(ringMain);
+    
     const ringSecond = new THREE.Mesh(ringGeo, ringMatGlow);
     ringSecond.rotation.z = Math.PI / 3;
     ringSecond.rotation.x = 0.8;
@@ -505,112 +586,106 @@
     ringSecond.scale.set(0.92, 0.92, 0.92);
     cityGroup.add(ringSecond);
     
-    // Dôme supérieur
+    const ringThird = new THREE.Mesh(new THREE.TorusGeometry(1.45, 0.07, 128, 200), ringMatGlow);
+    ringThird.rotation.x = 1.2;
+    ringThird.rotation.z = 0.5;
+    ringThird.position.y = 5.0;
+    cityGroup.add(ringThird);
+    
+    // Dome Top
     const dome = new THREE.Mesh(new THREE.SphereGeometry(0.78, 64, 64), new THREE.MeshStandardMaterial({ color: 0xB8C5CE, metalness: 0.92, emissive: 0x8FA0AB, emissiveIntensity: 0.2 }));
     dome.position.y = 5.8;
     cityGroup.add(dome);
     
-    // Bâtiments multiples (détaillés)
+    // Advanced Building Generation with More Details
     const buildingColors = [0x9AACB8, 0x7E929F, 0xA5B5C0, 0x8FA0AB];
     const windowMatB = new THREE.MeshStandardMaterial({ color: 0xE8E4E0, emissive: 0xC5D0D8, emissiveIntensity: 0.4 });
-    for (let i = 0; i < 42; i++) {
-        const w = 0.42 + Math.random() * 0.8;
-        const h = 1.3 + Math.random() * 3.2;
-        const d = 0.42 + Math.random() * 0.8;
-        const building = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), new THREE.MeshStandardMaterial({ color: buildingColors[Math.floor(Math.random() * buildingColors.length)], metalness: 0.65, roughness: 0.3 }));
+    for (let i = 0; i < 65; i++) {
+        const w = 0.42 + Math.random() * 0.9;
+        const h = 1.3 + Math.random() * 3.5;
+        const d = 0.42 + Math.random() * 0.9;
+        const buildingMat = new THREE.MeshStandardMaterial({ color: buildingColors[Math.floor(Math.random() * buildingColors.length)], metalness: 0.65, roughness: 0.3 });
+        const building = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), buildingMat);
         const angle = Math.random() * Math.PI * 2;
-        const radius = 2.7 + Math.random() * 5.6;
+        const radius = 2.7 + Math.random() * 6.2;
         building.position.x = Math.cos(angle) * radius;
         building.position.z = Math.sin(angle) * radius;
         building.position.y = h / 2;
         building.castShadow = true;
+        building.receiveShadow = true;
         cityGroup.add(building);
-        for (let wi = 0; wi < 8; wi++) {
+        
+        // Windows with random patterns
+        for (let wi = 0; wi < 12; wi++) {
             const winMesh = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.15, 0.04), windowMatB);
             winMesh.position.set((Math.random() - 0.5) * w * 0.7, (Math.random() - 0.5) * h * 0.7 + 0.2, d / 2 + 0.02);
             building.add(winMesh);
         }
-        const roof = new THREE.Mesh(new THREE.BoxGeometry(w + 0.09, 0.12, d + 0.09), new THREE.MeshStandardMaterial({ color: 0xB8C5CE, metalness: 0.7 }));
+        // Roof detail
+        const roof = new THREE.Mesh(new THREE.CylinderGeometry(w * 0.7, w, 0.15, 8), new THREE.MeshStandardMaterial({ color: 0xB8C5CE, metalness: 0.7 }));
         roof.position.y = h;
         building.add(roof);
     }
     
-    // Routes annulaires
+    // Advanced Road System with glowing edges
     const roadMat = new THREE.MeshStandardMaterial({ color: 0x7E8F9A, metalness: 0.25, roughness: 0.7 });
-    for (let r = 0; r < 4; r++) {
-        const road = new THREE.Mesh(new THREE.TorusGeometry(2.4 + r * 2.1, 0.18, 64, 220), roadMat);
+    for (let r = 0; r < 5; r++) {
+        const road = new THREE.Mesh(new THREE.TorusGeometry(2.2 + r * 2.3, 0.18, 64, 220), roadMat);
         road.rotation.x = Math.PI / 2;
         road.position.y = -0.48;
         scene.add(road);
-        const lineMat = new THREE.MeshStandardMaterial({ color: 0xD4CFC9, emissive: 0xE8E4E0, emissiveIntensity: 0.2 });
-        const lineRing = new THREE.Mesh(new THREE.TorusGeometry(2.4 + r * 2.1, 0.05, 64, 220), lineMat);
+        const lineMat = new THREE.MeshStandardMaterial({ color: 0xD4CFC9, emissive: 0xE8E4E0, emissiveIntensity: 0.25 });
+        const lineRing = new THREE.Mesh(new THREE.TorusGeometry(2.2 + r * 2.3, 0.05, 64, 220), lineMat);
         lineRing.rotation.x = Math.PI / 2;
         lineRing.position.y = -0.46;
         scene.add(lineRing);
     }
     
-    // Arbres futuristes (détaillés)
+    // Futuristic Trees with more detail
     const trunkMat = new THREE.MeshStandardMaterial({ color: 0x8FAA8F });
     const foliageMat = new THREE.MeshStandardMaterial({ color: 0x6B8F6B, emissive: 0x4A7A4A, emissiveIntensity: 0.1 });
-    for (let t = 0; t < 32; t++) {
+    for (let t = 0; t < 50; t++) {
         const treeGroup = new THREE.Group();
         const angle = Math.random() * Math.PI * 2;
-        const radius = 3.4 + Math.random() * 4.8;
-        const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.14, 0.75, 6), trunkMat);
-        trunk.position.y = 0.38;
+        const radius = 3.4 + Math.random() * 5.5;
+        const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.14, 0.85, 6), trunkMat);
+        trunk.position.y = 0.42;
         treeGroup.add(trunk);
-        const foliage1 = new THREE.Mesh(new THREE.ConeGeometry(0.22, 0.45, 8), foliageMat);
-        foliage1.position.y = 0.82;
+        const foliage1 = new THREE.Mesh(new THREE.ConeGeometry(0.24, 0.5, 8), foliageMat);
+        foliage1.position.y = 0.85;
         treeGroup.add(foliage1);
-        const foliage2 = new THREE.Mesh(new THREE.ConeGeometry(0.18, 0.38, 8), foliageMat);
-        foliage2.position.y = 1.18;
+        const foliage2 = new THREE.Mesh(new THREE.ConeGeometry(0.19, 0.42, 8), foliageMat);
+        foliage2.position.y = 1.25;
         treeGroup.add(foliage2);
+        const foliage3 = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.35, 8), foliageMat);
+        foliage3.position.y = 1.58;
+        treeGroup.add(foliage3);
         treeGroup.position.x = Math.cos(angle) * radius;
         treeGroup.position.z = Math.sin(angle) * radius;
         treeGroup.position.y = -0.55;
         scene.add(treeGroup);
     }
     
-    // Lampadaires
+    // Advanced Lamp Posts with light cones
     const lampMat = new THREE.MeshStandardMaterial({ color: 0xC5D0D8, metalness: 0.85 });
     const lightLamp = new THREE.MeshStandardMaterial({ color: 0xFFEE88, emissive: 0xFFAA44, emissiveIntensity: 0.6 });
-    for (let l = 0; l < 24; l++) {
+    for (let l = 0; l < 32; l++) {
         const lampGroup = new THREE.Group();
-        const angle = (l / 24) * Math.PI * 2;
-        const radius = 3.8;
-        const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.09, 1.3, 6), lampMat);
-        pole.position.y = 0.65;
+        const angle = (l / 32) * Math.PI * 2;
+        const radius = 4.0;
+        const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.09, 1.4, 6), lampMat);
+        pole.position.y = 0.7;
         lampGroup.add(pole);
-        const head = new THREE.Mesh(new THREE.SphereGeometry(0.14, 12, 12), lightLamp);
-        head.position.y = 1.3;
+        const head = new THREE.Mesh(new THREE.SphereGeometry(0.15, 12, 12), lightLamp);
+        head.position.y = 1.4;
         lampGroup.add(head);
         lampGroup.position.set(Math.cos(angle) * radius, -0.35, Math.sin(angle) * radius);
         scene.add(lampGroup);
     }
     
-    // Robots au sol (12)
-    const robotMatBody = new THREE.MeshStandardMaterial({ color: 0x9AACB8, metalness: 0.75 });
-    const robotEye = new THREE.MeshStandardMaterial({ color: 0x44AAFF, emissive: 0x2288FF, emissiveIntensity: 0.7 });
-    for (let r = 0; r < 14; r++) {
-        const robotGroup = new THREE.Group();
-        const angle = Math.random() * Math.PI * 2;
-        const radius = 3.0 + Math.random() * 4.2;
-        const body = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.3, 0.2), robotMatBody);
-        body.position.y = 0.15;
-        robotGroup.add(body);
-        const head = new THREE.Mesh(new THREE.SphereGeometry(0.11, 12, 12), robotMatBody);
-        head.position.y = 0.36;
-        robotGroup.add(head);
-        const eye = new THREE.Mesh(new THREE.SphereGeometry(0.045, 8, 8), robotEye);
-        eye.position.set(0.06, 0.4, 0.11);
-        robotGroup.add(eye);
-        robotGroup.position.set(Math.cos(angle) * radius, -0.48, Math.sin(angle) * radius);
-        scene.add(robotGroup);
-    }
-    
-    // Voitures volantes (14 avec ailes)
+    // Flying Vehicles - More dynamic
     const flyingCars = [];
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 24; i++) {
         const car = new THREE.Group();
         const bodyMatCar = new THREE.MeshStandardMaterial({ color: 0x8FA0AB, metalness: 0.88 });
         const bodyCar = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.14, 0.82), bodyMatCar);
@@ -631,9 +706,9 @@
         car.add(frontLightCar);
         car.userData = {
             angle: Math.random() * Math.PI * 2,
-            radius: 4.2 + Math.random() * 5.2,
-            speed: 0.0025 + Math.random() * 0.007,
-            height: 1.8 + Math.random() * 4.0,
+            radius: 4.5 + Math.random() * 5.5,
+            speed: 0.003 + Math.random() * 0.008,
+            height: 1.8 + Math.random() * 4.2,
             rotOffset: Math.random() * Math.PI
         };
         car.position.y = car.userData.height;
@@ -641,9 +716,9 @@
         flyingCars.push(car);
     }
     
-    // Drones (petits robots volants)
+    // Drone Swarm (More)
     const drones = [];
-    for (let i = 0; i < 22; i++) {
+    for (let i = 0; i < 35; i++) {
         const drone = new THREE.Group();
         const core = new THREE.Mesh(new THREE.SphereGeometry(0.1, 16, 16), new THREE.MeshStandardMaterial({ color: 0x9AACB8, metalness: 0.78, emissive: 0x8FA0AB, emissiveIntensity: 0.3 }));
         drone.add(core);
@@ -656,85 +731,93 @@
         const ledDrone = new THREE.Mesh(new THREE.SphereGeometry(0.045, 8, 8), new THREE.MeshStandardMaterial({ color: 0x44AAFF, emissive: 0x2288FF, emissiveIntensity: 0.8 }));
         ledDrone.position.set(0, -0.06, 0.13);
         drone.add(ledDrone);
-        drone.userData = { offsetX: (Math.random() - 0.5) * 10, offsetZ: (Math.random() - 0.5) * 10, time: Math.random() * Math.PI * 2, rotSpeed: 0.015 + Math.random() * 0.025 };
-        drone.position.set(drone.userData.offsetX, 1.3 + Math.random() * 4.5, drone.userData.offsetZ);
+        drone.userData = { offsetX: (Math.random() - 0.5) * 12, offsetZ: (Math.random() - 0.5) * 12, time: Math.random() * Math.PI * 2, rotSpeed: 0.015 + Math.random() * 0.025 };
+        drone.position.set(drone.userData.offsetX, 1.3 + Math.random() * 5.2, drone.userData.offsetZ);
         cityGroup.add(drone);
         drones.push(drone);
     }
     
     scene.add(cityGroup);
     
-    // Sol et grille
-    const groundPlane = new THREE.Mesh(new THREE.PlaneGeometry(38, 38), new THREE.MeshStandardMaterial({ color: 0xD4CFC9, roughness: 0.5, metalness: 0.3, transparent: true, opacity: 0.25 }));
+    // Enhanced Ground with subtle grid
+    const groundPlane = new THREE.Mesh(new THREE.PlaneGeometry(42, 42), new THREE.MeshStandardMaterial({ color: 0xD4CFC9, roughness: 0.5, metalness: 0.3, transparent: true, opacity: 0.2 }));
     groundPlane.rotation.x = -Math.PI / 2;
     groundPlane.position.y = -0.62;
     groundPlane.receiveShadow = true;
     scene.add(groundPlane);
-    const gridHelper = new THREE.GridHelper(42, 90, 0x8FA0AB, 0xB8C5CE);
+    const gridHelper = new THREE.GridHelper(48, 120, 0x8FA0AB, 0xB8C5CE);
     gridHelper.position.y = -0.58;
     gridHelper.material.transparent = true;
-    gridHelper.material.opacity = 0.25;
+    gridHelper.material.opacity = 0.3;
     scene.add(gridHelper);
     
-    // Particules & étoiles
-    const particleCount = 3500;
+    // Particle System (Atmosphere)
+    const particleCount = 5000;
     const particleGeo = new THREE.BufferGeometry();
     const particlePos = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
-        particlePos[i*3] = (Math.random() - 0.5) * 48;
-        particlePos[i*3+1] = Math.random() * 12;
-        particlePos[i*3+2] = (Math.random() - 0.5) * 38 - 10;
+        particlePos[i*3] = (Math.random() - 0.5) * 55;
+        particlePos[i*3+1] = Math.random() * 14;
+        particlePos[i*3+2] = (Math.random() - 0.5) * 45 - 10;
     }
     particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
-    const particles = new THREE.Points(particleGeo, new THREE.PointsMaterial({ color: 0x9AACB8, size: 0.045, transparent: true, blending: THREE.AdditiveBlending }));
+    const particles = new THREE.Points(particleGeo, new THREE.PointsMaterial({ color: 0x9AACB8, size: 0.04, transparent: true, blending: THREE.AdditiveBlending }));
     scene.add(particles);
     
-    const starCount = 1800;
+    // Starfield Background
+    const starCount = 2500;
     const starGeoObj = new THREE.BufferGeometry();
     const starPosArray = new Float32Array(starCount * 3);
     for (let i = 0; i < starCount; i++) {
-        starPosArray[i*3] = (Math.random() - 0.5) * 250;
-        starPosArray[i*3+1] = (Math.random() - 0.5) * 120;
-        starPosArray[i*3+2] = (Math.random() - 0.5) * 150 - 80;
+        starPosArray[i*3] = (Math.random() - 0.5) * 280;
+        starPosArray[i*3+1] = (Math.random() - 0.5) * 140;
+        starPosArray[i*3+2] = (Math.random() - 0.5) * 180 - 80;
     }
     starGeoObj.setAttribute('position', new THREE.BufferAttribute(starPosArray, 3));
-    const starsField = new THREE.Points(starGeoObj, new THREE.PointsMaterial({ color: 0xB8C5CE, size: 0.04, transparent: true, opacity: 0.45 }));
+    const starsField = new THREE.Points(starGeoObj, new THREE.PointsMaterial({ color: 0xB8C5CE, size: 0.035, transparent: true, opacity: 0.5 }));
     scene.add(starsField);
     
     let time = 0;
     function animate() {
         requestAnimationFrame(animate);
-        time += 0.006;
+        time += 0.008;
         
-        cityGroup.rotation.y = Math.sin(time * 0.045) * 0.07;
-        ringMain.rotation.z += 0.007;
-        ringSecond.rotation.x = 0.8 + Math.sin(time) * 0.07;
-        ringSecond.rotation.y += 0.005;
+        cityGroup.rotation.y = Math.sin(time * 0.04) * 0.08;
+        ringMain.rotation.z += 0.008;
+        ringSecond.rotation.x = 0.8 + Math.sin(time) * 0.1;
+        ringSecond.rotation.y += 0.006;
+        ringThird.rotation.x += 0.005;
+        ringThird.rotation.z += 0.004;
+        
+        // Animated color light
+        colorLight.intensity = 0.5 + Math.sin(time * 1.5) * 0.2;
+        colorLight.position.x = 2 + Math.sin(time) * 1.2;
         
         flyingCars.forEach(c => {
             c.userData.angle += c.userData.speed;
             c.position.x = Math.cos(c.userData.angle) * c.userData.radius;
             c.position.z = Math.sin(c.userData.angle) * c.userData.radius;
-            c.position.y = c.userData.height + Math.sin(time * 2.4 + c.userData.radius) * 0.12;
+            c.position.y = c.userData.height + Math.sin(time * 2.8 + c.userData.radius) * 0.15;
             c.rotation.y = c.userData.angle + Math.PI / 2;
-            c.rotation.z = Math.sin(time * 3.2 + c.userData.radius) * 0.06;
+            c.rotation.z = Math.sin(time * 3.5 + c.userData.radius) * 0.08;
         });
         
         drones.forEach(d => {
-            d.userData.time += 0.05;
-            d.position.y = 1.4 + Math.sin(d.userData.time) * 0.85 + Math.cos(d.userData.time * 1.3) * 0.3;
+            d.userData.time += 0.06;
+            d.position.y = 1.4 + Math.sin(d.userData.time) * 1.0 + Math.cos(d.userData.time * 1.4) * 0.4;
             d.rotation.x += d.userData.rotSpeed;
             d.rotation.z += d.userData.rotSpeed * 0.8;
-            d.children.forEach(child => { if(child.geometry && child.geometry.type === 'BoxGeometry') child.rotation.z += 0.08; });
+            d.children.forEach(child => { if(child.geometry && child.geometry.type === 'BoxGeometry') child.rotation.z += 0.1; });
         });
         
-        particles.rotation.y += 0.0004;
-        starsField.rotation.x += 0.0002;
-        accentLight.position.x = 3 + Math.sin(time) * 1.5;
-        accentLight.intensity = 0.6 + Math.sin(time * 2) * 0.12;
+        particles.rotation.y += 0.0005;
+        starsField.rotation.x += 0.0003;
+        accentLight.position.x = 3 + Math.sin(time) * 1.8;
+        accentLight.intensity = 0.6 + Math.sin(time * 2.2) * 0.15;
         
-        camera.position.x += (Math.sin(time * 0.06) * 0.06 - camera.position.x) * 0.02;
-        camera.lookAt(0, 2.8, 0);
+        // Smooth camera movement
+        camera.position.x += (Math.sin(time * 0.05) * 0.1 - camera.position.x) * 0.02;
+        camera.lookAt(0, 3.2, 0);
         
         renderer.render(scene, camera);
     }
@@ -746,10 +829,11 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
     
+    // Interactive mouse effect
     document.addEventListener('mousemove', (e) => {
         const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-        camera.position.x += (mouseX * 0.3 - camera.position.x) * 0.04;
-        camera.lookAt(0, 2.8, 0);
+        camera.position.x += (mouseX * 0.4 - camera.position.x) * 0.05;
+        camera.lookAt(0, 3.2, 0);
     });
 </script>
 
