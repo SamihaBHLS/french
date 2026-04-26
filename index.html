@@ -1,848 +1,914 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>La Ville des Rêves | Cité Future - Édition Prestige</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: #E8E4E0;
-            color: #2C2C2C;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #D4CFC9; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb { background: #8FA0AB; border-radius: 10px; }
-
-        /* Hero Section with Parallax & 3D Canvas */
-        .hero {
-            position: relative;
-            height: 100vh;
-            width: 100%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding-left: 8%;
-        }
-        #three-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 800px;
-            animation: fadeInLeft 1.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
-        .hero h1 {
-            font-size: 6.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #0F1E2C, #3A5A6A, #6B8A9A);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: shine 5s linear infinite;
-            letter-spacing: 3px;
-            margin-bottom: 1.2rem;
-            line-height: 1.1;
-        }
-        .hero p {
-            font-size: 1.5rem;
-            color: #2A3C46;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            font-weight: 500;
-        }
-        .btn-scroll {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(143, 160, 171, 0.2);
-            backdrop-filter: blur(10px);
-            border: 1.5px solid rgba(107, 127, 140, 0.5);
-            padding: 16px 40px;
-            border-radius: 60px;
-            color: #2C4A5A;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.4s;
-            letter-spacing: 1px;
-            font-size: 1.1rem;
-            cursor: pointer;
-        }
-        .btn-scroll:hover {
-            background: #8FA0AB;
-            color: #F5F2EF;
-            box-shadow: 0 0 35px rgba(143, 160, 171, 0.5);
-            transform: translateY(-4px);
-        }
-        @keyframes shine {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-70px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* Section Styles - Enhanced Transitions */
-        section {
-            position: relative;
-            padding: 100px 8%;
-            z-index: 2;
-        }
-        .section-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .section-header {
-            margin-bottom: 3rem;
-            text-align: center;
-            position: relative;
-        }
-        .section-number {
-            font-size: 1rem;
-            color: #8FA0AB;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
-            font-weight: 500;
-            display: inline-block;
-            background: rgba(143,160,171,0.1);
-            padding: 0.3rem 1.2rem;
-            border-radius: 50px;
-            backdrop-filter: blur(4px);
-        }
-        .section-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #1A2A3A, #4A6A7A);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-            letter-spacing: -0.5px;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 90px;
-            height: 4px;
-            background: linear-gradient(90deg, #8FA0AB, #B8C5CE);
-            border-radius: 3px;
-            margin: 14px auto 0;
-            transition: width 0.6s ease;
-        }
-        .section-header:hover .section-title::after {
-            width: 140px;
-        }
-
-        /* Glassmorphic Master Card */
-        .master-card {
-            background: rgba(245, 242, 239, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 56px;
-            padding: 3rem 2.8rem;
-            border: 1px solid rgba(143, 160, 171, 0.4);
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
-            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.4s ease;
-            margin: 1.5rem 0 1rem;
-        }
-        .master-card:hover {
-            box-shadow: 0 28px 55px rgba(0, 0, 0, 0.12);
-            transform: translateY(-6px);
-            background: rgba(245, 242, 239, 0.94);
-        }
-        
-        .pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 1.2rem;
-        }
-        .pillar-item {
-            background: rgba(255, 255, 255, 0.35);
-            border-radius: 32px;
-            padding: 1.8rem;
-            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            border: 1px solid rgba(143, 160, 171, 0.25);
-            backdrop-filter: blur(4px);
-            position: relative;
-            overflow: hidden;
-        }
-        .pillar-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(143,160,171,0.1), transparent);
-            transition: left 0.6s ease;
-        }
-        .pillar-item:hover::before {
-            left: 100%;
-        }
-        .pillar-item:hover {
-            background: rgba(255, 255, 255, 0.6);
-            transform: translateX(8px) translateY(-5px);
-            border-color: rgba(143, 160, 171, 0.7);
-        }
-        .pillar-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #8FA0AB20, #B8C5CE60);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.3rem;
-            color: #3A6070;
-            margin-bottom: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-        .pillar-item:hover .pillar-icon {
-            transform: scale(1.05) rotate(3deg);
-        }
-        .pillar-item h3 {
-            font-size: 1.9rem;
-            font-weight: 700;
-            color: #1A2A3A;
-            margin-bottom: 1rem;
-            letter-spacing: -0.3px;
-        }
-        .pillar-text {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #3A4A55;
-            margin-bottom: 1.2rem;
-            border-left: 3px solid #8FA0AB;
-            padding-left: 1rem;
-        }
-        .pillar-tags {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-        .tag {
-            background: rgba(143, 160, 171, 0.2);
-            padding: 5px 14px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #3A6070;
-            transition: all 0.3s ease;
-        }
-        .tag:hover {
-            background: rgba(143, 160, 171, 0.4);
-            transform: translateY(-2px);
-        }
-        
-        .intro-block, .conclusion-special {
-            background: rgba(245, 242, 239, 0.75);
-            backdrop-filter: blur(8px);
-            border-radius: 48px;
-            padding: 2.5rem 3rem;
-            margin: 2rem auto;
-            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            border: 1px solid rgba(143, 160, 171, 0.3);
-            max-width: 1100px;
-        }
-        .intro-block:hover, .conclusion-special:hover {
-            transform: scale(1.01);
-            background: rgba(245, 242, 239, 0.85);
-            border-color: rgba(143, 160, 171, 0.6);
-        }
-        .intro-block {
-            text-align: center;
-        }
-        .intro-icon {
-            font-size: 3rem;
-            color: #6B8A9A;
-            margin-bottom: 1.5rem;
-            animation: gentleFloat 3s ease-in-out infinite;
-        }
-        @keyframes gentleFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        .intro-block p {
-            font-size: 1.35rem;
-            line-height: 1.65;
-            color: #2E404E;
-            max-width: 850px;
-            margin: 0 auto;
-        }
-        
-        .conclusion-special {
-            background: linear-gradient(125deg, rgba(245,242,239,0.85), rgba(220,215,210,0.7));
-            backdrop-filter: blur(8px);
-            text-align: center;
-        }
-        .conclusion-grid-simple {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            margin: 2rem 0 1.2rem;
-        }
-        .conclusion-card-item {
-            background: rgba(255, 255, 255, 0.65);
-            border-radius: 32px;
-            padding: 1.8rem 2rem;
-            flex: 1;
-            min-width: 240px;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            border: 1px solid rgba(143,160,171,0.4);
-        }
-        .conclusion-card-item:hover {
-            transform: translateY(-8px);
-            background: rgba(255,255,240,0.9);
-            border-color: #8FA0AB;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
-        }
-        .conclusion-card-item i {
-            font-size: 2.5rem;
-            color: #6B7F8C;
-            margin-bottom: 1rem;
-            transition: transform 0.3s ease;
-        }
-        .conclusion-card-item:hover i {
-            transform: scale(1.1);
-        }
-        .conclusion-card-item h4 {
-            font-size: 1.7rem;
-            margin-bottom: 0.9rem;
-            color: #1A2A3A;
-        }
-        .conclusion-card-item p {
-            font-size: 1.1rem;
-            line-height: 1.5;
-            color: #3A4A55;
-        }
-        .quote-modern {
-            background: rgba(143, 160, 171, 0.15);
-            border-radius: 40px;
-            padding: 1.8rem;
-            font-size: 1.35rem;
-            font-style: italic;
-            border-left: 4px solid #8FA0AB;
-            border-right: 4px solid #B8C5CE;
-            margin-top: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        .quote-modern:hover {
-            background: rgba(143, 160, 171, 0.25);
-            letter-spacing: 0.3px;
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            background: #D4CFC9;
-            color: #3A4A55;
-            font-size: 0.9rem;
-        }
-        
-        /* Scroll Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(45px);
-            transition: all 0.8s cubic-bezier(0.2, 0.95, 0.4, 1.1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* New Hover Micro-interactions */
-        .btn-scroll, .tag, .pillar-item, .conclusion-card-item {
-            cursor: pointer;
-        }
-        
-        /* Floating Animation for Hero Text */
-        @keyframes softPulse {
-            0%, 100% { text-shadow: 0 0 0px rgba(0,0,0,0); }
-            50% { text-shadow: 0 0 8px rgba(143,160,171,0.3); }
-        }
-        
-        @media (max-width: 968px) {
-            .hero { padding-left: 5%; }
-            .hero h1 { font-size: 3.8rem; }
-            .hero p { font-size: 1.2rem; }
-            .section-title { font-size: 2.5rem; }
-            .pillars-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .master-card { padding: 2rem; }
-            .pillar-item h3 { font-size: 1.6rem; }
-            .pillar-text { font-size: 1rem; }
-            .intro-block p { font-size: 1.1rem; }
-            .conclusion-card-item h4 { font-size: 1.4rem; }
-            .quote-modern { font-size: 1.1rem; }
-            section { padding: 70px 5%; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Ville de mes Rêves</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory:   #F3F1EC;
+  --moss:    #B6B8AB;
+  --smoke:   #9FA3AD;
+  --garden:  #E0DFD2;
+  --midnight:#3C3E4A;
+  --off:     #2a2c36;
+}
+ 
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+ 
+body {
+  background: var(--ivory);
+  color: var(--midnight);
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+ 
+/* ─── CURSOR ─── */
+.cur {
+  position:fixed;width:10px;height:10px;border-radius:50%;
+  background:var(--midnight);pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;
+}
+.cur-r {
+  position:fixed;width:32px;height:32px;border-radius:50%;
+  border:1px solid var(--smoke);pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);transition:transform .12s ease-out,width .3s,height .3s;
+  opacity:.6;
+}
+ 
+/* ─── HERO ─── */
+#hero {
+  position:relative;width:100%;height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+ 
+/* 3D CITY CANVAS */
+#city-canvas {
+  position:absolute;inset:0;width:100%;height:100%;z-index:0;
+}
+ 
+/* hero overlay gradient */
+#hero::after {
+  content:'';position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 60%, rgba(243,241,236,0.55) 0%, transparent 70%),
+    linear-gradient(to top, rgba(243,241,236,0.95) 0%, rgba(243,241,236,0.2) 40%, transparent 70%);
+}
+ 
+.hero-content {
+  position:relative;z-index:3;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:1.2rem;
+}
+ 
+.hero-eyebrow {
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.65rem;letter-spacing:.5rem;
+  color:var(--smoke);text-transform:uppercase;
+  opacity:0;animation:rise .9s .2s ease forwards;
+}
+ 
+h1.hero-title {
+  font-family:'Cinzel',serif;
+  font-size:clamp(2.8rem,8vw,7.5rem);
+  font-weight:400;line-height:1;
+  color:var(--midnight);
+  opacity:0;animation:rise 1.1s .5s ease forwards;
+  letter-spacing:.02em;
+}
+h1.hero-title em {
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-weight:300;
+  color:var(--off);font-size:1.1em;
+}
+ 
+.hero-sub {
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:clamp(1rem,2vw,1.4rem);
+  color:var(--off);letter-spacing:.1em;
+  opacity:0;animation:rise .9s .8s ease forwards;
+}
+ 
+.hero-line {
+  width:60px;height:1px;background:var(--moss);
+  opacity:0;animation:widen 1s 1.1s ease forwards;
+  transform-origin:left;
+}
+ 
+.scroll-indicator {
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  z-index:3;display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  opacity:0;animation:fade-in .8s 1.8s ease forwards;
+}
+.scroll-indicator span {
+  font-size:.55rem;letter-spacing:.4rem;color:var(--smoke);text-transform:uppercase;
+}
+.scroll-track {
+  width:1px;height:55px;background:var(--garden);overflow:hidden;position:relative;
+}
+.scroll-fill {
+  width:100%;height:100%;background:var(--moss);
+  animation:scroll-fall 2s 2s ease-in-out infinite;
+}
+@keyframes scroll-fall {
+  0%{transform:translateY(-100%);}
+  100%{transform:translateY(100%);}
+}
+ 
+/* ─── SECTIONS ─── */
+.section {
+  position:relative;z-index:2;
+  padding:8rem 2rem;max-width:1100px;margin:0 auto;
+}
+ 
+.section-tag {
+  font-size:.6rem;letter-spacing:.45rem;text-transform:uppercase;
+  color:var(--moss);margin-bottom:1rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.section-tag::after {
+  content:'';flex:1;max-width:80px;height:1px;background:var(--moss);opacity:.4;
+}
+ 
+.section-title {
+  font-family:'Cinzel',serif;font-weight:400;
+  font-size:clamp(1.8rem,4vw,3.5rem);
+  color:var(--midnight);margin-bottom:2.5rem;line-height:1.2;
+}
+ 
+/* ─── INTRO BAND ─── */
+#intro-band {
+  background:var(--midnight);
+  padding:6rem 2rem;
+  position:relative;overflow:hidden;
+}
+#intro-band::before {
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 80% 50%, rgba(159,163,173,0.08) 0%, transparent 70%);
+}
+.intro-inner {
+  max-width:900px;margin:0 auto;display:grid;
+  grid-template-columns:1fr 2fr;gap:4rem;align-items:start;
+}
+.intro-num {
+  font-family:'Cormorant Garamond',serif;
+  font-size:10rem;font-weight:300;line-height:1;
+  color:rgba(255,255,255,0.05);letter-spacing:-.03em;
+  user-select:none;
+}
+.intro-text-col {}
+.intro-label {
+  font-size:.6rem;letter-spacing:.45rem;text-transform:uppercase;
+  color:var(--moss);margin-bottom:1.5rem;
+}
+.intro-heading {
+  font-family:'Cinzel',serif;font-size:clamp(1.5rem,3vw,2.2rem);
+  color:var(--ivory);margin-bottom:1.5rem;font-weight:400;
+}
+.intro-body {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;line-height:1.9;
+  color:var(--moss);font-weight:300;
+}
+ 
+/* ─── CARDS ─── */
+.cards-grid {
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5px;
+  background:var(--moss);opacity:.3 /* replaced dynamically */;
+}
+/* use wrapper instead */
+.cards-wrapper {
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1px;background:var(--moss);
+}
+ 
+.card {
+  background:var(--garden);
+  padding:3rem 2.5rem;position:relative;overflow:hidden;
+  transition:background .4s ease, transform .4s ease;
+  opacity:0;transform:translateY(24px);
+}
+.card.vis {
+  opacity:1;transform:translateY(0);
+  transition:opacity .7s ease, transform .7s ease, background .4s, box-shadow .4s;
+}
+.card:hover {
+  background:var(--midnight);z-index:2;
+  box-shadow:0 30px 80px rgba(60,62,74,.25);
+  transform:translateY(-6px) scale(1.01);
+}
+.card:hover .card-num,
+.card:hover .card-title,
+.card:hover .card-body,
+.card:hover .card-icon-char {
+  color:var(--ivory);
+}
+.card:hover .card-line { background:var(--smoke); }
+ 
+.card::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--moss),var(--smoke));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s ease;
+}
+.card:hover::before { transform:scaleX(1); }
+ 
+.card-num {
+  font-family:'Cormorant Garamond',serif;
+  font-size:.75rem;color:var(--moss);letter-spacing:.3rem;
+  margin-bottom:2rem;transition:color .4s;
+}
+.card-icon-char {
+  font-size:2.2rem;margin-bottom:1.2rem;display:block;
+  transition:color .4s;color:var(--midnight);line-height:1;
+}
+.card-line {
+  width:30px;height:1px;background:var(--moss);
+  margin-bottom:1.5rem;transition:background .4s,width .4s;
+}
+.card:hover .card-line { width:50px; }
+.card-title {
+  font-family:'Cinzel',serif;font-size:1rem;font-weight:400;
+  color:var(--midnight);margin-bottom:1rem;transition:color .4s;line-height:1.3;
+}
+.card-body {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;line-height:1.85;color:var(--smoke);
+  font-weight:300;transition:color .4s;
+}
+ 
+/* ─── STATS ─── */
+#stats {
+  background:var(--garden);
+  border-top:1px solid rgba(182,184,171,.3);
+  border-bottom:1px solid rgba(182,184,171,.3);
+  padding:5rem 2rem;
+}
+.stats-inner {
+  max-width:900px;margin:0 auto;
+  display:flex;justify-content:space-around;flex-wrap:wrap;gap:3rem;
+}
+.stat {text-align:center;}
+.stat-num {
+  font-family:'Cinzel',serif;font-size:3.5rem;font-weight:400;
+  color:var(--midnight);line-height:1;
+}
+.stat-unit {
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1rem;color:var(--smoke);margin-top:.3rem;letter-spacing:.1em;
+}
+.stat-bar {
+  width:60px;height:2px;background:var(--moss);
+  margin:.8rem auto 0;transform:scaleX(0);transform-origin:left;
+  transition:transform .8s ease;
+}
+.stat-bar.vis { transform:scaleX(1); }
+ 
+/* ─── CONCLUSION ─── */
+#conclusion {
+  position:relative;overflow:hidden;
+  background:var(--midnight);
+  padding:9rem 2rem;text-align:center;
+}
+#conclusion::before {
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 60% at 30% 50%, rgba(182,184,171,.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 70% 50%, rgba(159,163,173,.06) 0%, transparent 70%);
+}
+.conclusion-inner {
+  position:relative;z-index:1;max-width:700px;margin:0 auto;
+}
+.conclusion-glyph {
+  font-size:4rem;margin-bottom:2rem;display:block;
+  animation:float 5s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+}
+.conclusion-title {
+  font-family:'Cinzel',serif;font-size:clamp(2rem,5vw,3.5rem);
+  color:var(--ivory);margin-bottom:2rem;font-weight:400;
+}
+.conclusion-body {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.25rem;line-height:2;color:var(--moss);font-weight:300;
+}
+ 
+/* ─── FOOTER ─── */
+footer {
+  background:var(--off);color:var(--smoke);
+  padding:3rem 2rem;text-align:center;
+  font-size:.6rem;letter-spacing:.35rem;text-transform:uppercase;
+  border-top:1px solid rgba(159,163,173,.1);
+}
+ 
+/* ─── KEYFRAMES ─── */
+@keyframes rise {
+  from{opacity:0;transform:translateY(22px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes widen {
+  from{opacity:0;width:0;}
+  to{opacity:1;width:60px;}
+}
+@keyframes fade-in {
+  from{opacity:0;}to{opacity:1;}
+}
+ 
+/* ─── PARALLAX BAND ─── */
+.parallax-strip {
+  height:2px;background:linear-gradient(90deg,transparent,var(--moss),var(--smoke),var(--moss),transparent);
+  opacity:.4;
+}
+ 
+/* Reveal utility */
+.reveal {
+  opacity:0;transform:translateY(28px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+.reveal.vis {opacity:1;transform:translateY(0);}
+</style>
 </head>
 <body>
-
-<section id="hero" class="hero">
-    <div id="three-canvas"></div>
-    <div class="hero-content">
-        <h1>La Ville<br>des Rêves</h1>
-        <p>Où l'innovation rencontre l'harmonie — La cité idéale du futur</p>
-        <a href="#intro" class="btn-scroll">Explorer l'avenir <i class="fas fa-arrow-down"></i></a>
-    </div>
+ 
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="curR"></div>
+ 
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section id="hero">
+  <canvas id="city-canvas"></canvas>
+ 
+  <div class="hero-content">
+    <p class="hero-eyebrow">Anno Domini 2147 — Vision Prospective</p>
+    <h1 class="hero-title">La Ville de<br><em>mes Rêves</em></h1>
+    <p class="hero-sub">dans le futur</p>
+    <div class="hero-line"></div>
+  </div>
+ 
+  <div class="scroll-indicator">
+    <span>Découvrir</span>
+    <div class="scroll-track"><div class="scroll-fill"></div></div>
+  </div>
 </section>
-
-<section id="intro">
-    <div class="section-container">
-        <div class="section-header">
-            <div class="section-number">01 — introduction</div>
-            <h2 class="section-title"><i class="fas fa-star"></i> Introduction visionnaire</h2>
-        </div>
-        <div class="intro-block reveal">
-            <div class="intro-icon"><i class="fas fa-city"></i></div>
-            <p>Dans un futur lointain, les villes connaîtront une évolution remarquable grâce au progrès technologique . <strong>La ville de mes rêves</strong>  représente un espace moderne, organisé et agréable à vivre. Elle combine innovation, respect de l’environnement et confort pour les habitants. Cette ville idéale répond aux besoins de l’homme tout en lui offrant une meilleure qualité de vie.</p>
-            <div style="margin-top: 1.8rem;"><span class="tag">RÊVE & INNOVATION</span><span class="tag" style="margin-left: 0.8rem;">HARMONIE URBAINE</span></div>
-        </div>
+ 
+<!-- ═══════════════════════════════ INTRO BAND ═══════════════════════════════ -->
+<div class="parallax-strip"></div>
+<section id="intro-band">
+  <div class="intro-inner reveal">
+    <div class="intro-num">01</div>
+    <div class="intro-text-col">
+      <div class="intro-label">✦ Introduction</div>
+      <h2 class="intro-heading">Une Vision du Futur Lointain</h2>
+      <p class="intro-body">
+       Dans un futur lointain, les villes connaîtront une évolution remarquable grâce au progrès technologique. La ville de mes rêves représente un espace moderne, organisé et agréable à vivre. Elle combine innovation, respect de l’environnement et confort pour les habitants. Cette ville idéale répond aux besoins de l’homme tout en lui offrant une meilleure qualité de vie.
+      </p>
     </div>
+  </div>
 </section>
-
-<section id="core-pillars">
-    <div class="section-container">
-        <div class="section-header">
-            <div class="section-number">02 — piliers</div>
-            <h2 class="section-title"><i class="fas fa-building"></i> Les piliers de la cité idéale</h2>
-        </div>
-        <div class="master-card reveal">
-            <div class="pillars-grid">
-                <div class="pillar-item">
-                    <div class="pillar-icon"><i class="fas fa-microchip"></i></div>
-                    <h3>1. Ville intelligente</h3>
-                    <div class="pillar-text">La ville du futur est basée sur des technologies avancées. Les bâtiments sont intelligents et capables de s’adapter aux besoins des habitants. Les rues sont propres grâce à des systèmes automatiques de nettoyage. L’éclairage est assuré par des dispositifs économiques et écologiques. Tout est organisé pour faciliter la vie quotidienne.</div>
-                    <div class="pillar-tags"><span class="tag">BÂTIMENTS CONNECTÉS</span><span class="tag">IA URBAINE</span></div>
-                </div>
-                <div class="pillar-item">
-                    <div class="pillar-icon"><i class="fas fa-car-side"></i></div>
-                    <h3>2. Mobilité futuriste</h3>
-                    <div class="pillar-text">Dans cette ville, les moyens de transport sont très développés. Les voitures peuvent être autonomes ou même volantes. Il n’y a plus d’embouteillages grâce à une bonne organisation. Les déplacements sont rapides, sécurisés et confortables. Il est aussi possible d’utiliser des moyens modernes comme la téléportation dans certains cas.</div>
-                    <div class="pillar-tags"><span class="tag">VOITURES VOLANTES</span><span class="tag">TÉLÉPORTATION</span></div>
-                </div>
-                <div class="pillar-item">
-                    <div class="pillar-icon"><i class="fas fa-leaf"></i></div>
-                    <h3>3. Écologie durable</h3>
-                    <div class="pillar-text">La protection de l’environnement est une priorité. La ville utilise des énergies renouvelables comme le soleil et le vent. Il n’y a presque pas de pollution. Les espaces verts sont nombreux, ce qui rend l’air pur et l’environnement agréable. Les habitants vivent en harmonie avec la nature.</div>
-                    <div class="pillar-tags"><span class="tag">ÉNERGIE PROPRE</span><span class="tag">ZÉRO CARBONE</span></div>
-                </div>
-                <div class="pillar-item">
-                    <div class="pillar-icon"><i class="fas fa-robot"></i></div>
-                    <h3>4. Technologie avancée</h3>
-                    <div class="pillar-text">La technologie joue un rôle important dans cette ville. Les robots aident les habitants dans leurs tâches quotidiennes. L’intelligence artificielle facilite l’organisation de la vie. Les services sont rapides et efficaces, ce qui permet aux habitants de gagner du temps et de vivre plus confortablement.</div>
-                    <div class="pillar-tags"><span class="tag">ROBOTS DOMESTIQUES</span><span class="tag">IA PRÉDICTIVE</span></div>
-                </div>
-            </div>
-        </div>
+<div class="parallax-strip"></div>
+ 
+<!-- ═══════════════════════════════ STATS ═══════════════════════════════ -->
+<section id="stats">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num" data-target="100">0</div>
+      <div class="stat-unit">% Énergie renouvelable</div>
+      <div class="stat-bar"></div>
     </div>
+    <div class="stat">
+      <div class="stat-num" data-target="0">—</div>
+      <div class="stat-unit">Pollution atmosphérique</div>
+      <div class="stat-bar"></div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" data-target="24">0</div>
+      <div class="stat-unit">h/7 Services intelligents</div>
+      <div class="stat-bar"></div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" data-target="2147">0</div>
+      <div class="stat-unit">Année cible</div>
+      <div class="stat-bar"></div>
+    </div>
+  </div>
 </section>
-
+ 
+<!-- ═══════════════════════════════ CARDS ═══════════════════════════════ -->
+<section class="section">
+  <p class="section-tag reveal">Les quatre piliers</p>
+  <h2 class="section-title reveal">Explorer la Ville</h2>
+  <div class="cards-wrapper">
+    <div class="card">
+      <div class="card-num">01</div>
+      <span class="card-icon-char"><i class="fas fa-building"></i></span>
+      <div class="card-line"></div>
+      <h3 class="card-title">Une Ville Intelligente et Moderne</h3>
+      <p class="card-body">La ville du futur est basée sur des technologies avancées. Les bâtiments sont intelligents et capables de s’adapter aux besoins des habitants. Les rues sont propres grâce à des systèmes automatiques de nettoyage. L’éclairage est assuré par des dispositifs économiques et écologiques. Tout est organisé pour faciliter la vie quotidienne.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">02</div>
+      <span class="card-icon-char"><i class="fas fa-car"></i></span>
+      <div class="card-line"></div>
+      <h3 class="card-title">Des Transports Rapides et Innovants</h3>
+      <p class="card-body">Dans cette ville, les moyens de transport sont très développés. Les voitures peuvent être autonomes ou même volantes. Il n’y a plus d’embouteillages grâce à une bonne organisation. Les déplacements sont rapides, sécurisés et confortables. Il est aussi possible d’utiliser des moyens modernes comme la téléportation dans certains cas.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">03</div>
+      <span class="card-icon-char"><i class="fas fa-leaf"></i></span>
+      <div class="card-line"></div>
+      <h3 class="card-title">Une Ville Écologique et Durable</h3>
+      <p class="card-body">La protection de l’environnement est une priorité. La ville utilise des énergies renouvelables comme le soleil et le vent. Il n’y a presque pas de pollution. Les espaces verts sont nombreux, ce qui rend l’air pur et l’environnement agréable. Les habitants vivent en harmonie avec la nature.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">04</div>
+      <span class="card-icon-char"><i class="fas fa-robot"></i></span>
+      <div class="card-line"></div>
+      <h3 class="card-title">La Technologie au Service de l'Homme</h3>
+      <p class="card-body">La technologie joue un rôle important dans cette ville. Les robots aident les habitants dans leurs tâches quotidiennes. L’intelligence artificielle facilite l’organisation de la vie. Les services sont rapides et efficaces, ce qui permet aux habitants de gagner du temps et de vivre plus confortablement.</p>
+    </div>
+  </div>
+</section>
+ 
+<div class="parallax-strip"></div>
+ 
+<!-- ═══════════════════════════════ CONCLUSION ═══════════════════════════════ -->
 <section id="conclusion">
-    <div class="section-container">
-        <div class="section-header">
-            <div class="section-number">03 — conclusion</div>
-            <h2 class="section-title"><i class="fas fa-star"></i> Une vision accomplie</h2>
-        </div>
-        <div class="conclusion-special reveal">
-            <div class="conclusion-grid-simple">
-                <div class="conclusion-card-item">
-                    <i class="fas fa-hand-sparkles"></i>
-                    <h4>Équilibre parfait</h4>
-                    <p>Harmonie entre progrès technologique et nature. Un lieu où la ville respire au rythme de ses habitants et de son environnement.</p>
-                </div>
-                <div class="conclusion-card-item">
-                    <i class="fas fa-chart-line"></i>
-                    <h4>Avenir prometteur</h4>
-                    <p>Une vie plus simple, plus confortable, plus équilibrée. Grâce aux avancées scientifiques, ce modèle deviendra réalité.</p>
-                </div>
-            </div>
-            <div class="quote-modern">
-                <i class="fas fa-quote-left" style="color:#8FA0AB; margin-right:12px;"></i>
-                La ville de demain n'est pas seulement un rêve, c'est une destination que nous construirons ensemble, brique par brique, avec audace et respect du vivant.
-                <i class="fas fa-quote-right" style="color:#8FA0AB; margin-left:12px;"></i>
-            </div>
-            <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-                <span class="tag"><i class="fas fa-star"></i> HORIZON 2150</span>
-                <span class="tag"><i class="fas fa-leaf"></i> CITÉ RÉSILIENTE</span>
-            </div>
-        </div>
-    </div>
+  <div class="conclusion-inner reveal">
+    <span class="conclusion-glyph"><i class="fas fa-star"></i></span>
+    <h2 class="conclusion-title">Technologie & Nature<br>en Harmonie</h2>
+    <p class="conclusion-body">
+      En conclusion, la ville de mes rêves est un lieu idéal où la technologie et la nature coexistent en harmonie. Elle offre une vie plus simple, plus confortable et plus équilibrée. Ce modèle de ville pourrait devenir une réalité dans le futur grâce aux progrès scientifiques.
+    </p>
+  </div>
 </section>
-
-<footer class="footer">
-    <p><i class="fas fa-copyright"></i> La Ville des Rêves — Samiha Bouhalas <i class="fas fa-envelope"></i></p>
+ 
+<footer>
+  &copy; 2147 — La Ville de mes Rêves — Toujours demain
 </footer>
-
-<script type="importmap">
-    {
-        "imports": {
-            "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
-        }
-    }
-</script>
-
-<script type="module">
-    import * as THREE from 'three';
-
-    const canvasContainer = document.getElementById('three-canvas');
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xE8E4E0);
-    scene.fog = new THREE.FogExp2(0xE8E4E0, 0.0012);
-
-    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 5.2, 22);
-    camera.lookAt(0, 3.2, 0);
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.setPixelRatio(window.devicePixelRatio);
-    canvasContainer.appendChild(renderer.domElement);
-
-    // Enhanced Lighting System
-    const ambientLight = new THREE.AmbientLight(0xE8E4E0, 0.65);
-    scene.add(ambientLight);
-    const mainLight = new THREE.DirectionalLight(0xFFF8F0, 1.5);
-    mainLight.position.set(6, 14, 5);
-    mainLight.castShadow = true;
-    mainLight.shadow.mapSize.width = 2048;
-    mainLight.shadow.mapSize.height = 2048;
-    mainLight.shadow.camera.near = 0.5;
-    mainLight.shadow.camera.far = 30;
-    mainLight.shadow.camera.left = -10;
-    mainLight.shadow.camera.right = 10;
-    mainLight.shadow.camera.top = 10;
-    mainLight.shadow.camera.bottom = -10;
-    scene.add(mainLight);
-    
-    const fillLight = new THREE.PointLight(0x8FA0AB, 0.8);
-    fillLight.position.set(-4, 6, 7);
-    scene.add(fillLight);
-    const backLight = new THREE.PointLight(0xB8C5CE, 0.65);
-    backLight.position.set(0, 5, -10);
-    scene.add(backLight);
-    const accentLight = new THREE.PointLight(0x6B7F8C, 0.7);
-    accentLight.position.set(3, 3.5, 6);
-    scene.add(accentLight);
-    
-    // Animated colored lights for ambiance
-    const colorLight = new THREE.PointLight(0x8FA0AB, 0.5);
-    colorLight.position.set(2, 3, 4);
-    scene.add(colorLight);
-
-    const cityGroup = new THREE.Group();
-    
-    // Central Tower - More Detailed
-    const towerMat = new THREE.MeshStandardMaterial({ color: 0x8FA0AB, metalness: 0.88, roughness: 0.18, emissive: 0x6B7F8C, emissiveIntensity: 0.12 });
-    const mainTower = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 1.15, 5.8, 64), towerMat);
-    mainTower.position.y = 2.9;
-    mainTower.castShadow = true;
-    cityGroup.add(mainTower);
-    
-    // Detailed Windows on Tower
-    const winMat = new THREE.MeshStandardMaterial({ color: 0xE8E4E0, emissive: 0xC5D0D8, emissiveIntensity: 0.5 });
-    for (let i = 0; i < 48; i++) {
-        const wGeo = new THREE.BoxGeometry(0.12, 0.18, 0.05);
-        const win = new THREE.Mesh(wGeo, winMat);
-        const angle = (i / 48) * Math.PI * 2;
-        const rad = 1.0;
-        win.position.set(Math.cos(angle) * rad, 0.8 + Math.floor(i / 12) * 1.2, Math.sin(angle) * rad);
-        mainTower.add(win);
-    }
-    
-    // Floating Rings with rotation animation
-    const ringGeo = new THREE.TorusGeometry(1.75, 0.09, 128, 200);
-    const ringMatGlow = new THREE.MeshStandardMaterial({ color: 0xD4DFE6, emissive: 0x8FA0AB, emissiveIntensity: 0.4, metalness: 0.85 });
-    const ringMain = new THREE.Mesh(ringGeo, ringMatGlow);
-    ringMain.rotation.x = Math.PI / 2;
-    ringMain.position.y = 2.4;
-    cityGroup.add(ringMain);
-    
-    const ringSecond = new THREE.Mesh(ringGeo, ringMatGlow);
-    ringSecond.rotation.z = Math.PI / 3;
-    ringSecond.rotation.x = 0.8;
-    ringSecond.position.y = 3.9;
-    ringSecond.scale.set(0.92, 0.92, 0.92);
-    cityGroup.add(ringSecond);
-    
-    const ringThird = new THREE.Mesh(new THREE.TorusGeometry(1.45, 0.07, 128, 200), ringMatGlow);
-    ringThird.rotation.x = 1.2;
-    ringThird.rotation.z = 0.5;
-    ringThird.position.y = 5.0;
-    cityGroup.add(ringThird);
-    
-    // Dome Top
-    const dome = new THREE.Mesh(new THREE.SphereGeometry(0.78, 64, 64), new THREE.MeshStandardMaterial({ color: 0xB8C5CE, metalness: 0.92, emissive: 0x8FA0AB, emissiveIntensity: 0.2 }));
-    dome.position.y = 5.8;
-    cityGroup.add(dome);
-    
-    // Advanced Building Generation with More Details
-    const buildingColors = [0x9AACB8, 0x7E929F, 0xA5B5C0, 0x8FA0AB];
-    const windowMatB = new THREE.MeshStandardMaterial({ color: 0xE8E4E0, emissive: 0xC5D0D8, emissiveIntensity: 0.4 });
-    for (let i = 0; i < 65; i++) {
-        const w = 0.42 + Math.random() * 0.9;
-        const h = 1.3 + Math.random() * 3.5;
-        const d = 0.42 + Math.random() * 0.9;
-        const buildingMat = new THREE.MeshStandardMaterial({ color: buildingColors[Math.floor(Math.random() * buildingColors.length)], metalness: 0.65, roughness: 0.3 });
-        const building = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), buildingMat);
-        const angle = Math.random() * Math.PI * 2;
-        const radius = 2.7 + Math.random() * 6.2;
-        building.position.x = Math.cos(angle) * radius;
-        building.position.z = Math.sin(angle) * radius;
-        building.position.y = h / 2;
-        building.castShadow = true;
-        building.receiveShadow = true;
-        cityGroup.add(building);
-        
-        // Windows with random patterns
-        for (let wi = 0; wi < 12; wi++) {
-            const winMesh = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.15, 0.04), windowMatB);
-            winMesh.position.set((Math.random() - 0.5) * w * 0.7, (Math.random() - 0.5) * h * 0.7 + 0.2, d / 2 + 0.02);
-            building.add(winMesh);
-        }
-        // Roof detail
-        const roof = new THREE.Mesh(new THREE.CylinderGeometry(w * 0.7, w, 0.15, 8), new THREE.MeshStandardMaterial({ color: 0xB8C5CE, metalness: 0.7 }));
-        roof.position.y = h;
-        building.add(roof);
-    }
-    
-    // Advanced Road System with glowing edges
-    const roadMat = new THREE.MeshStandardMaterial({ color: 0x7E8F9A, metalness: 0.25, roughness: 0.7 });
-    for (let r = 0; r < 5; r++) {
-        const road = new THREE.Mesh(new THREE.TorusGeometry(2.2 + r * 2.3, 0.18, 64, 220), roadMat);
-        road.rotation.x = Math.PI / 2;
-        road.position.y = -0.48;
-        scene.add(road);
-        const lineMat = new THREE.MeshStandardMaterial({ color: 0xD4CFC9, emissive: 0xE8E4E0, emissiveIntensity: 0.25 });
-        const lineRing = new THREE.Mesh(new THREE.TorusGeometry(2.2 + r * 2.3, 0.05, 64, 220), lineMat);
-        lineRing.rotation.x = Math.PI / 2;
-        lineRing.position.y = -0.46;
-        scene.add(lineRing);
-    }
-    
-    // Futuristic Trees with more detail
-    const trunkMat = new THREE.MeshStandardMaterial({ color: 0x8FAA8F });
-    const foliageMat = new THREE.MeshStandardMaterial({ color: 0x6B8F6B, emissive: 0x4A7A4A, emissiveIntensity: 0.1 });
-    for (let t = 0; t < 50; t++) {
-        const treeGroup = new THREE.Group();
-        const angle = Math.random() * Math.PI * 2;
-        const radius = 3.4 + Math.random() * 5.5;
-        const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.14, 0.85, 6), trunkMat);
-        trunk.position.y = 0.42;
-        treeGroup.add(trunk);
-        const foliage1 = new THREE.Mesh(new THREE.ConeGeometry(0.24, 0.5, 8), foliageMat);
-        foliage1.position.y = 0.85;
-        treeGroup.add(foliage1);
-        const foliage2 = new THREE.Mesh(new THREE.ConeGeometry(0.19, 0.42, 8), foliageMat);
-        foliage2.position.y = 1.25;
-        treeGroup.add(foliage2);
-        const foliage3 = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.35, 8), foliageMat);
-        foliage3.position.y = 1.58;
-        treeGroup.add(foliage3);
-        treeGroup.position.x = Math.cos(angle) * radius;
-        treeGroup.position.z = Math.sin(angle) * radius;
-        treeGroup.position.y = -0.55;
-        scene.add(treeGroup);
-    }
-    
-    // Advanced Lamp Posts with light cones
-    const lampMat = new THREE.MeshStandardMaterial({ color: 0xC5D0D8, metalness: 0.85 });
-    const lightLamp = new THREE.MeshStandardMaterial({ color: 0xFFEE88, emissive: 0xFFAA44, emissiveIntensity: 0.6 });
-    for (let l = 0; l < 32; l++) {
-        const lampGroup = new THREE.Group();
-        const angle = (l / 32) * Math.PI * 2;
-        const radius = 4.0;
-        const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.09, 1.4, 6), lampMat);
-        pole.position.y = 0.7;
-        lampGroup.add(pole);
-        const head = new THREE.Mesh(new THREE.SphereGeometry(0.15, 12, 12), lightLamp);
-        head.position.y = 1.4;
-        lampGroup.add(head);
-        lampGroup.position.set(Math.cos(angle) * radius, -0.35, Math.sin(angle) * radius);
-        scene.add(lampGroup);
-    }
-    
-    // Flying Vehicles - More dynamic
-    const flyingCars = [];
-    for (let i = 0; i < 24; i++) {
-        const car = new THREE.Group();
-        const bodyMatCar = new THREE.MeshStandardMaterial({ color: 0x8FA0AB, metalness: 0.88 });
-        const bodyCar = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.14, 0.82), bodyMatCar);
-        car.add(bodyCar);
-        const roofCar = new THREE.Mesh(new THREE.BoxGeometry(0.45, 0.1, 0.56), new THREE.MeshStandardMaterial({ color: 0xC5D0D8, metalness: 0.92, transparent: true, opacity: 0.7 }));
-        roofCar.position.y = 0.12;
-        car.add(roofCar);
-        const wingGeo = new THREE.BoxGeometry(0.78, 0.05, 0.28);
-        const wingMatW = new THREE.MeshStandardMaterial({ color: 0xB8C5CE, metalness: 0.8 });
-        const leftWing = new THREE.Mesh(wingGeo, wingMatW);
-        leftWing.position.set(-0.44, 0.07, 0);
-        const rightWing = new THREE.Mesh(wingGeo, wingMatW);
-        rightWing.position.set(0.44, 0.07, 0);
-        car.add(leftWing);
-        car.add(rightWing);
-        const frontLightCar = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), new THREE.MeshStandardMaterial({ color: 0xFFAA66, emissive: 0xFF8844, emissiveIntensity: 0.7 }));
-        frontLightCar.position.set(0, 0.04, 0.46);
-        car.add(frontLightCar);
-        car.userData = {
-            angle: Math.random() * Math.PI * 2,
-            radius: 4.5 + Math.random() * 5.5,
-            speed: 0.003 + Math.random() * 0.008,
-            height: 1.8 + Math.random() * 4.2,
-            rotOffset: Math.random() * Math.PI
-        };
-        car.position.y = car.userData.height;
-        cityGroup.add(car);
-        flyingCars.push(car);
-    }
-    
-    // Drone Swarm (More)
-    const drones = [];
-    for (let i = 0; i < 35; i++) {
-        const drone = new THREE.Group();
-        const core = new THREE.Mesh(new THREE.SphereGeometry(0.1, 16, 16), new THREE.MeshStandardMaterial({ color: 0x9AACB8, metalness: 0.78, emissive: 0x8FA0AB, emissiveIntensity: 0.3 }));
-        drone.add(core);
-        for (let p = 0; p < 4; p++) {
-            const prop = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.03, 0.06), new THREE.MeshStandardMaterial({ color: 0xC5D0D8, metalness: 0.88 }));
-            const angleProp = (p * Math.PI * 2) / 4;
-            prop.position.set(Math.cos(angleProp) * 0.19, 0.08, Math.sin(angleProp) * 0.19);
-            drone.add(prop);
-        }
-        const ledDrone = new THREE.Mesh(new THREE.SphereGeometry(0.045, 8, 8), new THREE.MeshStandardMaterial({ color: 0x44AAFF, emissive: 0x2288FF, emissiveIntensity: 0.8 }));
-        ledDrone.position.set(0, -0.06, 0.13);
-        drone.add(ledDrone);
-        drone.userData = { offsetX: (Math.random() - 0.5) * 12, offsetZ: (Math.random() - 0.5) * 12, time: Math.random() * Math.PI * 2, rotSpeed: 0.015 + Math.random() * 0.025 };
-        drone.position.set(drone.userData.offsetX, 1.3 + Math.random() * 5.2, drone.userData.offsetZ);
-        cityGroup.add(drone);
-        drones.push(drone);
-    }
-    
-    scene.add(cityGroup);
-    
-    // Enhanced Ground with subtle grid
-    const groundPlane = new THREE.Mesh(new THREE.PlaneGeometry(42, 42), new THREE.MeshStandardMaterial({ color: 0xD4CFC9, roughness: 0.5, metalness: 0.3, transparent: true, opacity: 0.2 }));
-    groundPlane.rotation.x = -Math.PI / 2;
-    groundPlane.position.y = -0.62;
-    groundPlane.receiveShadow = true;
-    scene.add(groundPlane);
-    const gridHelper = new THREE.GridHelper(48, 120, 0x8FA0AB, 0xB8C5CE);
-    gridHelper.position.y = -0.58;
-    gridHelper.material.transparent = true;
-    gridHelper.material.opacity = 0.3;
-    scene.add(gridHelper);
-    
-    // Particle System (Atmosphere)
-    const particleCount = 5000;
-    const particleGeo = new THREE.BufferGeometry();
-    const particlePos = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount; i++) {
-        particlePos[i*3] = (Math.random() - 0.5) * 55;
-        particlePos[i*3+1] = Math.random() * 14;
-        particlePos[i*3+2] = (Math.random() - 0.5) * 45 - 10;
-    }
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
-    const particles = new THREE.Points(particleGeo, new THREE.PointsMaterial({ color: 0x9AACB8, size: 0.04, transparent: true, blending: THREE.AdditiveBlending }));
-    scene.add(particles);
-    
-    // Starfield Background
-    const starCount = 2500;
-    const starGeoObj = new THREE.BufferGeometry();
-    const starPosArray = new Float32Array(starCount * 3);
-    for (let i = 0; i < starCount; i++) {
-        starPosArray[i*3] = (Math.random() - 0.5) * 280;
-        starPosArray[i*3+1] = (Math.random() - 0.5) * 140;
-        starPosArray[i*3+2] = (Math.random() - 0.5) * 180 - 80;
-    }
-    starGeoObj.setAttribute('position', new THREE.BufferAttribute(starPosArray, 3));
-    const starsField = new THREE.Points(starGeoObj, new THREE.PointsMaterial({ color: 0xB8C5CE, size: 0.035, transparent: true, opacity: 0.5 }));
-    scene.add(starsField);
-    
-    let time = 0;
-    function animate() {
-        requestAnimationFrame(animate);
-        time += 0.008;
-        
-        cityGroup.rotation.y = Math.sin(time * 0.04) * 0.08;
-        ringMain.rotation.z += 0.008;
-        ringSecond.rotation.x = 0.8 + Math.sin(time) * 0.1;
-        ringSecond.rotation.y += 0.006;
-        ringThird.rotation.x += 0.005;
-        ringThird.rotation.z += 0.004;
-        
-        // Animated color light
-        colorLight.intensity = 0.5 + Math.sin(time * 1.5) * 0.2;
-        colorLight.position.x = 2 + Math.sin(time) * 1.2;
-        
-        flyingCars.forEach(c => {
-            c.userData.angle += c.userData.speed;
-            c.position.x = Math.cos(c.userData.angle) * c.userData.radius;
-            c.position.z = Math.sin(c.userData.angle) * c.userData.radius;
-            c.position.y = c.userData.height + Math.sin(time * 2.8 + c.userData.radius) * 0.15;
-            c.rotation.y = c.userData.angle + Math.PI / 2;
-            c.rotation.z = Math.sin(time * 3.5 + c.userData.radius) * 0.08;
-        });
-        
-        drones.forEach(d => {
-            d.userData.time += 0.06;
-            d.position.y = 1.4 + Math.sin(d.userData.time) * 1.0 + Math.cos(d.userData.time * 1.4) * 0.4;
-            d.rotation.x += d.userData.rotSpeed;
-            d.rotation.z += d.userData.rotSpeed * 0.8;
-            d.children.forEach(child => { if(child.geometry && child.geometry.type === 'BoxGeometry') child.rotation.z += 0.1; });
-        });
-        
-        particles.rotation.y += 0.0005;
-        starsField.rotation.x += 0.0003;
-        accentLight.position.x = 3 + Math.sin(time) * 1.8;
-        accentLight.intensity = 0.6 + Math.sin(time * 2.2) * 0.15;
-        
-        // Smooth camera movement
-        camera.position.x += (Math.sin(time * 0.05) * 0.1 - camera.position.x) * 0.02;
-        camera.lookAt(0, 3.2, 0);
-        
-        renderer.render(scene, camera);
-    }
-    animate();
-    
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-    
-    // Interactive mouse effect
-    document.addEventListener('mousemove', (e) => {
-        const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-        camera.position.x += (mouseX * 0.4 - camera.position.x) * 0.05;
-        camera.lookAt(0, 3.2, 0);
-    });
-</script>
-
+ 
 <script>
-    const reveals = document.querySelectorAll('.reveal');
-    function checkReveal() { reveals.forEach(el => { if(window.innerHeight - el.getBoundingClientRect().top > 90) el.classList.add('active'); }); }
-    window.addEventListener('scroll', checkReveal);
-    window.addEventListener('load', checkReveal);
-    document.querySelectorAll('.btn-scroll').forEach(anchor => { anchor.addEventListener('click', function(e) { e.preventDefault(); const target = document.getElementById(this.getAttribute('href').substring(1)); if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }); });
+/* ─────────────────────────────────────────────
+   CURSOR
+───────────────────────────────────────────── */
+const cur = document.getElementById('cur');
+const curR = document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,.card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';curR.style.width='50px';curR.style.height='50px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';curR.style.width='32px';curR.style.height='32px';});
+});
+ 
+/* ─────────────────────────────────────────────
+   3D CITY CANVAS
+───────────────────────────────────────────── */
+const canvas = document.getElementById('city-canvas');
+const ctx = canvas.getContext('2d');
+ 
+const P = { // palette
+  ivory:   '#F3F1EC',
+  moss:    '#B6B8AB',
+  smoke:   '#9FA3AD',
+  garden:  '#E0DFD2',
+  midnight:'#3C3E4A',
+  off:     '#2a2c36',
+};
+ 
+let W, H, cx, cy;
+let mouse = { x: 0.5, y: 0.5 };
+let tick = 0;
+ 
+function resize() {
+  W = canvas.width = canvas.offsetWidth;
+  H = canvas.height = canvas.offsetHeight;
+  cx = W / 2; cy = H / 2;
+}
+window.addEventListener('resize', resize);
+resize();
+document.addEventListener('mousemove', e => {
+  mouse.x = e.clientX / W;
+  mouse.y = e.clientY / H;
+});
+ 
+/* ── Buildings data ── */
+const buildings = [];
+function genBuildings() {
+  buildings.length = 0;
+  const cols = Math.floor(W / 55) + 6;
+  for (let i = 0; i < cols; i++) {
+    const x = (i / (cols - 1)) * W * 1.1 - W * 0.05;
+    const h = 80 + Math.random() * (H * 0.48);
+    const w = 22 + Math.random() * 38;
+    const row = Math.random() > 0.4 ? 0 : 1; // front/back
+    buildings.push({ x, h, w, row, phase: Math.random() * Math.PI * 2,
+      color: Math.random() > 0.5 ? P.midnight : P.off,
+      windows: Array.from({length: Math.floor(Math.random()*8+4)}, () => ({
+        ox: Math.random(), oy: Math.random(), lit: Math.random() > 0.4, phase: Math.random()*6.28
+      }))
+    });
+  }
+  buildings.sort((a,b) => a.row - b.row);
+}
+genBuildings();
+window.addEventListener('resize', genBuildings);
+ 
+/* ── Robots ── */
+const robots = [
+  { x: W*0.18, y: 0, speed: 0.18, phase: 0 },
+  { x: W*0.72, y: 0, speed: 0.22, phase: 1.5 },
+  { x: W*0.45, y: 0, speed: 0.15, phase: 3 },
+];
+ 
+function drawRobot(x, y, scale=1, alpha=1) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.translate(x, y);
+  ctx.scale(scale, scale);
+  const c = P.smoke;
+  // body
+  ctx.fillStyle = c;
+  ctx.fillRect(-14, -22, 28, 24);
+  // head
+  ctx.fillRect(-10, -36, 20, 16);
+  // eyes
+  ctx.fillStyle = P.garden;
+  ctx.fillRect(-7, -33, 5, 5);
+  ctx.fillRect(2, -33, 5, 5);
+  // antenna
+  ctx.fillStyle = c;
+  ctx.fillRect(-1, -42, 2, 8);
+  ctx.beginPath();
+  ctx.arc(0, -44, 3, 0, Math.PI * 2);
+  ctx.fillStyle = P.ivory;
+  ctx.fill();
+  // legs
+  ctx.fillStyle = c;
+  ctx.fillRect(-12, 2, 9, 16);
+  ctx.fillRect(3, 2, 9, 16);
+  // arms
+  ctx.fillRect(-22, -20, 8, 6);
+  ctx.fillRect(14, -20, 8, 6);
+  ctx.restore();
+}
+ 
+/* ── Flying cars ── */
+const cars = Array.from({length: 12}, (_, i) => ({
+  x: Math.random() * W,
+  y: H * (0.12 + Math.random() * 0.38),
+  speed: (0.3 + Math.random() * 0.5) * (Math.random()>0.5?1:-1),
+  size: 0.4 + Math.random() * 0.5,
+  trail: [],
+  color: [P.ivory, P.garden, P.smoke, P.moss][Math.floor(Math.random()*4)],
+  phase: Math.random() * Math.PI * 2,
+  altitude: Math.random() * 8,
+}));
+ 
+function drawCar(car) {
+  const { x, y, size, color } = car;
+  const dir = car.speed > 0 ? 1 : -1;
+  const l = 28 * size, h2 = 10 * size;
+ 
+  // trail
+  if (car.trail.length > 1) {
+    ctx.beginPath();
+    ctx.moveTo(car.trail[0].x, car.trail[0].y);
+    for (let i = 1; i < car.trail.length; i++) {
+      ctx.lineTo(car.trail[i].x, car.trail[i].y);
+    }
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = 0.12;
+    ctx.lineWidth = 2 * size;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+ 
+  ctx.save();
+  ctx.translate(x, y);
+  if (dir < 0) ctx.scale(-1, 1);
+ 
+  // glow under
+  const grad = ctx.createRadialGradient(0, h2+2, 1, 0, h2+2, 18*size);
+  grad.addColorStop(0, color + '55');
+  grad.addColorStop(1, 'transparent');
+  ctx.fillStyle = grad;
+  ctx.fillRect(-l, h2, l*2, 16*size);
+ 
+  // body
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(-l, h2);
+  ctx.lineTo(-l*0.6, -h2*0.3);
+  ctx.lineTo(-l*0.1, -h2);
+  ctx.lineTo(l*0.3, -h2);
+  ctx.lineTo(l, h2*0.2);
+  ctx.closePath();
+  ctx.fill();
+ 
+  // window
+  ctx.fillStyle = P.midnight;
+  ctx.globalAlpha = 0.5;
+  ctx.beginPath();
+  ctx.moveTo(-l*0.15, -h2*0.85);
+  ctx.lineTo(l*0.25, -h2*0.85);
+  ctx.lineTo(l*0.4, h2*0.1);
+  ctx.lineTo(-l*0.05, h2*0.1);
+  ctx.closePath();
+  ctx.fill();
+  ctx.globalAlpha = 1;
+ 
+  // headlight
+  ctx.fillStyle = P.ivory;
+  ctx.beginPath();
+  ctx.arc(l*0.9, h2*0.1, 3*size, 0, Math.PI*2);
+  ctx.fill();
+ 
+  ctx.restore();
+}
+ 
+/* ── Drones ── */
+const drones = Array.from({length: 7}, () => ({
+  x: Math.random() * W,
+  y: H * 0.05 + Math.random() * H * 0.25,
+  vx: (Math.random()-.5) * 0.4,
+  vy: (Math.random()-.5) * 0.2,
+  phase: Math.random() * Math.PI * 2,
+  size: 0.5 + Math.random() * 0.5,
+}));
+ 
+function drawDrone(d, t) {
+  const { x, y, size } = d;
+  const bob = Math.sin(t * 0.03 + d.phase) * 4;
+  ctx.save();
+  ctx.translate(x, y + bob);
+ 
+  // body
+  ctx.fillStyle = P.midnight;
+  ctx.beginPath();
+  ctx.arc(0, 0, 7*size, 0, Math.PI*2);
+  ctx.fill();
+  ctx.strokeStyle = P.smoke;
+  ctx.lineWidth = 1*size;
+  ctx.stroke();
+ 
+  // rotors (4)
+  [[-14,-14],[14,-14],[-14,14],[14,14]].forEach(([rx,ry]) => {
+    ctx.save();
+    ctx.translate(rx*size, ry*size);
+    ctx.rotate(t * 0.15);
+    ctx.fillStyle = P.moss;
+    ctx.globalAlpha = 0.6;
+    ctx.fillRect(-8*size, -1*size, 16*size, 2*size);
+    ctx.rotate(Math.PI/2);
+    ctx.fillRect(-8*size, -1*size, 16*size, 2*size);
+    ctx.restore();
+    // arm
+    ctx.beginPath();
+    ctx.moveTo(0,0);ctx.lineTo(rx*size,ry*size);
+    ctx.strokeStyle=P.midnight; ctx.lineWidth=2*size; ctx.globalAlpha=1; ctx.stroke();
+  });
+  ctx.globalAlpha = 1;
+ 
+  // light
+  ctx.fillStyle = P.ivory;
+  ctx.beginPath();
+  ctx.arc(0, 0, 3*size, 0, Math.PI*2);
+  ctx.fill();
+  ctx.restore();
+}
+ 
+/* ── Ground floor / street ── */
+function drawStreet(groundY) {
+  // road
+  const rg = ctx.createLinearGradient(0, groundY, 0, groundY+60);
+  rg.addColorStop(0, P.off);
+  rg.addColorStop(1, P.midnight);
+  ctx.fillStyle = rg;
+  ctx.fillRect(0, groundY, W, 80);
+ 
+  // lane markings
+  ctx.strokeStyle = P.moss;
+  ctx.setLineDash([30, 20]);
+  ctx.lineWidth = 1.5;
+  ctx.globalAlpha = 0.25;
+  for (let lane = 1; lane <= 2; lane++) {
+    ctx.beginPath();
+    ctx.moveTo(0, groundY + 20*lane);
+    ctx.lineTo(W, groundY + 20*lane);
+    ctx.stroke();
+  }
+  ctx.setLineDash([]);
+  ctx.globalAlpha = 1;
+}
+ 
+/* ── Sky / atmosphere ── */
+function drawSky() {
+  const sg = ctx.createLinearGradient(0, 0, 0, H);
+  sg.addColorStop(0,   P.garden);
+  sg.addColorStop(0.35, '#D8D6C9');
+  sg.addColorStop(0.7,  '#C8C6B8');
+  sg.addColorStop(1,    P.moss + 'aa');
+  ctx.fillStyle = sg;
+  ctx.fillRect(0, 0, W, H);
+}
+ 
+/* ── Horizon glow ── */
+function drawHorizonGlow(groundY) {
+  const hg = ctx.createRadialGradient(cx, groundY, 10, cx, groundY, W*0.6);
+  hg.addColorStop(0, P.ivory + 'cc');
+  hg.addColorStop(0.5, P.garden + '55');
+  hg.addColorStop(1, 'transparent');
+  ctx.fillStyle = hg;
+  ctx.fillRect(0, groundY - 120, W, 200);
+}
+ 
+/* ── Particles (dust/mist) ── */
+const particles = Array.from({length:50},()=>({
+  x:Math.random()*1000, y:Math.random()*600,
+  vx:(Math.random()-.5)*.15, vy:-(Math.random()*.1+.02),
+  r:Math.random()*2+.5, alpha:Math.random()*.15+.02,
+  phase:Math.random()*6.28
+}));
+ 
+/* ── MAIN RENDER LOOP ── */
+function draw() {
+  tick++;
+  const para = (mouse.x - 0.5) * 30; // parallax offset
+ 
+  ctx.clearRect(0, 0, W, H);
+  drawSky();
+ 
+  const groundY = H * 0.72;
+  drawHorizonGlow(groundY);
+ 
+  // Back-row buildings
+  buildings.filter(b=>b.row===1).forEach(b => {
+    const px = b.x + para * 0.3;
+    const by = groundY - b.h * 0.65;
+    ctx.fillStyle = b.color + 'bb';
+    ctx.fillRect(px - b.w*0.5, by, b.w*0.85, b.h*0.65);
+    // windows
+    b.windows.forEach(w => {
+      if (!w.lit) return;
+      const wx = px - b.w*0.5 + w.ox * b.w*0.7 + 3;
+      const wy = by + w.oy * b.h*0.5 + 5;
+      const flicker = Math.sin(tick*0.03 + w.phase) > 0.85;
+      ctx.fillStyle = flicker ? P.ivory : P.garden;
+      ctx.globalAlpha = 0.35;
+      ctx.fillRect(wx, wy, 4, 3);
+      ctx.globalAlpha = 1;
+    });
+  });
+ 
+  // Front-row buildings
+  buildings.filter(b=>b.row===0).forEach(b => {
+    const px = b.x + para * 0.6;
+    const by = groundY - b.h;
+    // shadow
+    ctx.fillStyle = P.off + '33';
+    ctx.fillRect(px - b.w*0.5 + 6, by + 8, b.w, b.h);
+    // main
+    const bg = ctx.createLinearGradient(px - b.w/2, by, px + b.w/2, by);
+    bg.addColorStop(0, b.color);
+    bg.addColorStop(1, b.color + 'cc');
+    ctx.fillStyle = bg;
+    ctx.fillRect(px - b.w*0.5, by, b.w, b.h);
+    // top antenna
+    if (b.h > H * 0.35) {
+      ctx.fillStyle = P.smoke;
+      ctx.fillRect(px - 1.5, by - 20, 3, 22);
+      ctx.beginPath();
+      ctx.arc(px, by - 22, 4, 0, Math.PI*2);
+      ctx.fillStyle = Math.sin(tick*0.05 + b.phase) > 0 ? P.ivory : P.garden;
+      ctx.fill();
+    }
+    // windows
+    const cols = Math.max(1, Math.floor(b.w / 12));
+    const rows = Math.max(1, Math.floor(b.h / 16));
+    for (let wc = 0; wc < cols; wc++) {
+      for (let wr = 0; wr < rows; wr++) {
+        const wx = px - b.w*0.5 + 6 + wc * 12;
+        const wy = by + 6 + wr * 16;
+        const lit = (wc + wr + Math.floor(b.phase)) % 3 !== 0;
+        ctx.fillStyle = lit ? P.garden : P.midnight;
+        ctx.globalAlpha = lit ? 0.65 : 0.3;
+        ctx.fillRect(wx, wy, 6, 7);
+        ctx.globalAlpha = 1;
+      }
+    }
+  });
+ 
+  // Street
+  drawStreet(groundY);
+ 
+  // Street-level robots
+  robots.forEach((rb, i) => {
+    const rx = ((rb.x + para * 0.8 + tick * rb.speed) % (W + 200)) - 100;
+    const ry = groundY - 18;
+    const bob = Math.sin(tick * 0.04 + rb.phase) * 2;
+    drawRobot(rx, ry + bob, 1, 0.85);
+  });
+ 
+  // Flying cars
+  cars.forEach(car => {
+    car.trail.push({ x: car.x, y: car.y });
+    if (car.trail.length > 22) car.trail.shift();
+    car.x += car.speed + para * 0.004 * Math.sign(car.speed);
+    car.y += Math.sin(tick * 0.015 + car.phase) * car.altitude * 0.06;
+    if (car.x > W + 120) car.x = -100;
+    if (car.x < -120) car.x = W + 100;
+    drawCar(car);
+  });
+ 
+  // Drones
+  drones.forEach(d => {
+    d.x += d.vx + para * 0.002;
+    d.y += d.vy;
+    if (d.x > W + 50) d.x = -30;
+    if (d.x < -50) d.x = W + 30;
+    if (d.y < 20) d.vy = Math.abs(d.vy);
+    if (d.y > H * 0.45) d.vy = -Math.abs(d.vy);
+    drawDrone(d, tick);
+  });
+ 
+  // Floating particles
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+    if (p.y < -10) p.y = groundY;
+    const a = p.alpha * (0.6 + 0.4 * Math.sin(tick*0.02 + p.phase));
+    ctx.beginPath();
+    ctx.arc(p.x * W/1000, p.y * H/600, p.r, 0, Math.PI*2);
+    ctx.fillStyle = P.ivory;
+    ctx.globalAlpha = a;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  });
+ 
+  requestAnimationFrame(draw);
+}
+draw();
+ 
+/* ─────────────────────────────────────────────
+   INTERSECTION OBSERVER — SCROLL REVEALS
+───────────────────────────────────────────── */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+ 
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+ 
+// Cards staggered
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const cards = e.target.querySelectorAll('.card');
+      cards.forEach((c, i) => setTimeout(() => c.classList.add('vis'), i * 130));
+      cio.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.cards-wrapper').forEach(el => cio.observe(el));
+ 
+/* ─────────────────────────────────────────────
+   COUNTER ANIMATION
+───────────────────────────────────────────── */
+function animCount(el, to, dur=1600) {
+  if (to === 0) { el.textContent = '0%'; return; }
+  const t0 = Date.now();
+  const run = () => {
+    const p = Math.min((Date.now()-t0)/dur, 1);
+    const v = Math.round(p < 1 ? (1-Math.pow(1-p,3)) * to : to);
+    el.textContent = to===2147 ? v : (to===24 ? v+'h' : v+'%');
+    if (p < 1) requestAnimationFrame(run);
+  };
+  requestAnimationFrame(run);
+}
+ 
+const sio = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.stat-num').forEach(el => {
+      const t = parseInt(el.dataset.target);
+      if (!isNaN(t)) animCount(el, t);
+    });
+    document.querySelectorAll('.stat-bar').forEach(b => b.classList.add('vis'));
+    sio.disconnect();
+  }
+}, { threshold: 0.5 });
+sio.observe(document.getElementById('stats'));
 </script>
 </body>
 </html>
